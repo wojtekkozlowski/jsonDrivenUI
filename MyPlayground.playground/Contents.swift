@@ -1,4 +1,4 @@
-//: Playground - noun: a place where people can play
+//:    Playground - noun: a place where people can play
 
 import UIKit
 import PlaygroundSupport
@@ -8,7 +8,7 @@ typealias DoneFunc = (inout Action) -> Void
 
 protocol Action {
     var actions: [Action]! { get set }
-    var done: DoneFunc? {get set}
+    var done: DoneFunc? { get set }
     func run()
 }
 
@@ -16,19 +16,19 @@ class ChoiceAction: Action {
     var actions: [Action]!
     var done: DoneFunc?
     var pvc: UIViewController!
-    
+
     let title: String
     let button1: String
     let button2: String
-    
-    init(data: [String: AnyObject]){
+
+    init(data: [String: AnyObject]) {
         title = data["title"] as! String
         button1 = data["button1"] as! String
         button2 = data["button2"] as! String
     }
-    
+
     func run() {
-        
+
         if let done = done {
             let a1 = UIAlertAction(title: button1, style: .default, handler: { _ in
                 done(&self.actions[0])
@@ -42,22 +42,21 @@ class ChoiceAction: Action {
             self.pvc.present(u, animated: true, completion: nil)
         }
     }
-    
 }
 
 class OkAction: Action {
     var actions: [Action]!
     var done: DoneFunc?
     var pvc: UIViewController!
-    
+
     let title: String
     let button: String
-    
-    init(data: [String: AnyObject]){
+
+    init(data: [String: AnyObject]) {
         title = data["title"] as! String
         button = data["button"] as! String
     }
-    
+
     func run() {
         if let done = done {
             let u = UIAlertController(title: "", message: "", preferredStyle: .alert)
@@ -70,9 +69,7 @@ class OkAction: Action {
             self.pvc.present(u, animated: true, completion: nil)
         }
     }
-    
 }
-
 
 class ActionModel: Mappable {
     var type: String!
@@ -80,7 +77,7 @@ class ActionModel: Mappable {
     var actions: [ActionModel]?
     required init?(map: Map) {
     }
-    
+
     func mapping(map: Map) {
         type <- map["type"]
         actions <- map["actions"]
@@ -94,21 +91,21 @@ let json = NSString(data: contentData!, encoding: String.Encoding.utf8.rawValue)
 
 let m = Mapper<ActionModel>().map(JSONString: json!)!
 
-struct ModelToAction{
+struct ModelToAction {
     let model: ActionModel
-    
-    func convert() -> Action{
+
+    func convert() -> Action {
         return convert(model: self.model)
     }
-    
-    private func convert(model: ActionModel) -> Action{
+
+    private func convert(model: ActionModel) -> Action {
         var a = actionForModel(model: model)
-        if let actions =  model.actions {
+        if let actions = model.actions {
             a.actions = actions.map { actionForModel(model: $0) }
         }
         return a
     }
-    
+
     private func actionForModel(model: ActionModel) -> Action {
         switch model.type {
         case "CHOICE": return ChoiceAction(data: model.data!)
@@ -119,4 +116,3 @@ struct ModelToAction{
 }
 
 ModelToAction(model: m).convert()
-

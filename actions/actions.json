@@ -1,18 +1,52 @@
 {
   "actions": [
     {
+      "actions": [
+        {
+          "data": {
+            "button": "yup",
+            "title": "End Primary 1"
+          },
+          "type": "OK"
+        },
+        {
+          "data": {
+            "button": "yup 2",
+            "title": "End Secondary 1"
+          },
+          "type": "OK"
+        }
+      ],
       "data": {
-        "button": "yup",
-        "title": "OK primary"
+        "button1": "Primary 1",
+        "button2": "Secondary 1 ",
+        "title": "Primary"
       },
-      "type": "OK"
+      "type": "CHOICE"
     },
     {
+      "actions": [
+        {
+          "data": {
+            "button": "yup",
+            "title": "End Primary 2"
+          },
+          "type": "OK"
+        },
+        {
+          "data": {
+            "button": "yup 2",
+            "title": "End Secondary 2"
+          },
+          "type": "OK"
+        }
+      ],
       "data": {
-        "button": "yup 2",
-        "title": "OK secondary"
+        "button1": "Primary 2",
+        "button2": "Secondary 2",
+        "title": "Secondary choice"
       },
-      "type": "OK"
+      "type": "CHOICE"
     }
   ],
   "data": {
