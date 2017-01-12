@@ -20,11 +20,3 @@ class ViewController: UIViewController {
     }
 }
 
-typealias DoneFunc = (inout Action) -> Void
-
-protocol Action {
-    var actions: [Action]! { get set }
-    var done: DoneFunc? { get set }
-    weak var pvc: UIViewController? { get set }
-    func run()
-}
