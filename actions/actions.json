@@ -1,0 +1,24 @@
+{
+  "actions": [
+    {
+      "data": {
+        "button": "yup",
+        "title": "OK primary"
+      },
+      "type": "OK"
+    },
+    {
+      "data": {
+        "button": "yup 2",
+        "title": "OK secondary"
+      },
+      "type": "OK"
+    }
+  ],
+  "data": {
+    "button1": "Primary",
+    "button2": "Secondary",
+    "title": "Root choice"
+  },
+  "type": "CHOICE"
+}
